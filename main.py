@@ -21,14 +21,22 @@ def main():
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
+    group_updatable = pygame.sprite.Group()
+    group_drawable = pygame.sprite.Group()
+
+    Player.containers = (group_drawable,group_updatable)
+
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        player.update(dt)
+        for obj in group_updatable:
+            obj.update(dt)
         screen.fill("black")
-        player.draw(screen)
+
+        for obj in group_drawable:
+            obj.draw(screen)
         
         pygame.display.flip()
         tock = clock.tick(60)
