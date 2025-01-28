@@ -1,3 +1,4 @@
+import sys
 import pygame
 from constants import *
 from player import *
@@ -9,8 +10,6 @@ def main():
     #return "'Starting asteroids!'"
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-    #pygame.Surface.fill(screen, (255,255,255))
 
     clock = pygame.time.Clock()
     dt = 0
@@ -39,6 +38,11 @@ def main():
         keys = pygame.key.get_pressed()
         for obj in group_updatable:
             obj.update(dt)
+
+        for asteroid in group_asteroids:
+            if asteroid.collides_with(player):
+                print("Game over!")
+                sys.exit()
         
         screen.fill("black")
 
