@@ -48,6 +48,7 @@ def main():
                 sys.exit()
             for bullet in group_shots:
                 if asteroid.collides_with(bullet):
+                    asteroid.split()
                     asteroid.kill()
                     bullet.kill()
         
